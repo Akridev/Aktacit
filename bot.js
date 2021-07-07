@@ -59,16 +59,6 @@ client.on('message', message=> {
         client.commands.get('bruhmoment' || 'bm').execute(message, args);
     }
 
-    
-    
-        if (message.content === 'flick') {
-            message.react('👌')
-                .then(() => message.react('😂'))
-                .then(() => message.react('🔥'))
-                .then(() => message.react('💯'))
-                .catch(error => console.error('One of the emojis failed to react:', error));
-        }
-
 });
 
 
