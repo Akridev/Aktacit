@@ -1,0 +1,18 @@
+{
+  "name": "ak_dcbot",
+  "version": "1.0.0",
+  "description": "First attempt to create a dc bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akshay Shashikant",
+  "license": "ISC",
+  "dependencies": {
+    "discord-hangman": "^1.1.1",
+    "discord.js": "^12.5.3",
+    "node-fetch": "^2.6.1",
+    "weather": "^1.0.4",
+    "weather-js": "^2.0.0"
+  }
+}
