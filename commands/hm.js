@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const client = new.Discord.Client()
+const client = new Discord.Client()
 
 
 module.exports = {
@@ -63,10 +63,7 @@ module.exports = {
         \`\`\`
         `];
 
-        client.on('ready', () => {
-            client.user.setGame("!hangman");
-        console.log(`Logged in as ${client.user.tag}!`);
-        });
+        
 
         function generateMessage(phrase, guesses) {
             var s = "";
@@ -149,7 +146,7 @@ module.exports = {
                 }
             }
         });
-
+    
         client.on('message', msg => {
             if(msg.content.startsWith("!hangman")) {
                 var words = msg.content.split('\n')[0].split(' ');
