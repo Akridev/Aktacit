@@ -1,5 +1,6 @@
 const Discord = require("discord.js")
 
+
 module.exports = {
     name: 'bruhmoment' || 'bm',
     description: "use this to emphasise a bruhmoment",

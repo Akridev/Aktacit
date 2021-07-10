@@ -4,67 +4,21 @@ const client = new Discord.Client()
 
 module.exports = {
     name: 'hangman' || 'hm',
-    description: "use this to emphasise a bruhmoment",
+    description: "Play hangman",
     execute(message,args) {
-        var usage = "`!hangman <channel id> <your phrase>`\n`Example: !hangman 368845035560763402 grandest nan is the man`";
+        var usage = "`$hm <your word(can be a phrase)>,[INCLUDE COMMA BETWEEN WORD & CLUE]<your clue(can also be a phrase)>`\n`Example: $hm apples and bananas,fruits`";
         var letters = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯", "🇰", "🇱", "🇲", "🇳", "🇴", "🇵", "🇶", "🇷", "🇸", "🇹", "🇺", "🇻", "🇼", "🇽", "🇾", "🇿"];
         var unicode = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
         var games = [];
 
-        var stages = [`\`\`\`
-        /---|
-        |   
-        |
-        |
-        |
-        \`\`\`
-        `, `\`\`\`
-        /---|
-        |   o
-        |
-        |
-        |
-        \`\`\`
-        `, `\`\`\`
-        /---|
-        |   o
-        |   |
-        | 
-        |
-        \`\`\`
-        `, `\`\`\`
-        /---|
-        |   o
-        |  /|
-        |
-        |
-        \`\`\`
-        `, `\`\`\`
-        /---|
-        |   o
-        |  /|\\
-        |
-        |
-        \`\`\`
-        `, `\`\`\`
-        /---|
-        |   o
-        |  /|\\
-        |  /
-        |
-        \`\`\`
-        `, `\`\`\`
-        /---|
-        |   o ~ thanks
-        |  /|\\
-        |  / \\
-        |
-        \`\`\`
-        `];
-
+        var words = message.content.substr(3).split('\n')[0].split(',');
+        var word = words.slice(0,1).join(' ').toLowerCase().replace(/[^a-z\s:]/g, '');
+        var clue = words.slice(-1).join(' ').toLowerCase().replace(/[^a-z\s:]/g, '');
+        
         
 
+        
         function generateMessage(phrase, guesses) {
             var s = "";
             for(var i = 0; i < phrase.length; i++) {
@@ -80,6 +34,74 @@ module.exports = {
             return s;
         }
 
+        var stages = [`\`\`\`
+        /-----|     
+        |           clue: ${clue}
+        |           
+        |           word requested by ${message.author.username}
+        |           
+        =========
+        \`\`\`
+        `, `\`\`\`
+        /-----|
+        |    🤡     clue: ${clue}
+        |
+        |           word requested by ${message.author.username}
+        |
+        =========
+        \`\`\`
+        `, `\`\`\`
+        /-----|
+        |    🤡     clue: \'${clue}\'
+        |    🎽
+        |           word requested by ${message.author.username}
+        |
+        \`\`\`
+        `, `\`\`\`
+        /-----|
+        |    🤡        clue: \'${clue}\'
+        |  🤏🎽
+        |           word requested by ${message.author.username}
+        |
+        =========
+        \`\`\`
+        `, `\`\`\`
+        /-----|
+        |    🤡        clue: \'${clue}\'
+        |  🤏🎽👌
+        |           word requested by ${message.author.username}
+        |
+        =========
+        \`\`\`
+        `, `\`\`\`
+        /-----|
+        |    🤡        clue: \'${clue}\'
+        |  🤏🎽👌
+        |    🩳    word requested by ${message.author.username}
+        |
+        =========
+        \`\`\`
+        `, `\`\`\`
+        /-----|
+        |    🤡        Word not guessed,lost
+        |  🤏🎽👌       
+        |    🩳    word requested by ${message.author.username}
+        |    👞        word/phrase was \"${word}\"
+        =========       
+        \`\`\`
+        `];
+
+        if(words.length < 2) {
+            message.reply(usage);
+        } else {
+            
+            message.channel.send(stages[0]).then(m => {
+            message.delete();
+            nextLetter(m, 0, word);
+            });   
+        }
+        
+        
         function nextLetter(message, index, word) {
             message.react(letters[index]).then(r => {
                 index++;
@@ -101,8 +123,8 @@ module.exports = {
                 }
             });
         }
-
-        client.on('messageReactionAdd', (reaction, user) => {
+        
+        message.client.on('messageReactionAdd', (reaction, user) => {
             var msg = reaction.message;
             if(!user.bot) {
                 for(var i = 0; i < games.length; i++) {
@@ -110,8 +132,8 @@ module.exports = {
                     if((msg.id == game.msg0.id || msg.id == game.msg1.id) && game.stage < stages.length) {
                         var letter = unicode[letters.indexOf(reaction.emoji.name)];
                         
-                        reaction.fetchUsers().then(usrs => {
-                            var reactors = usrs.array();
+                        reaction.fetch().then(usrs => {
+                            var reactors = usrs.array;
                             var remove_next = function(index) {
                                 if(index < reactors.length)
                                     reaction.remove(reactors[index]).then(() => remove_next(index + 1));
@@ -134,11 +156,14 @@ module.exports = {
                                     }
                                 }
                                 
+                                game.msg1.edit(generateMessage(game.phrase, game.guesses));
+
                                 if(sik) {
-                                    game.msg0.edit(stages[game.stage].replace("o", "o ~ ur alright.. for now"));
+                                    return game.msg0.edit(stages[game.stage].replace("-|", "-|     you guessed the phrase, nice"));
+                                    
                                 }
                                 
-                                game.msg1.edit(generateMessage(game.phrase, game.guesses));
+                                
                             }
                         }
                     }
@@ -146,25 +171,5 @@ module.exports = {
                 }
             }
         });
-    
-        client.on('message', msg => {
-            if(msg.content.startsWith("!hangman")) {
-                var words = msg.content.split('\n')[0].split(' ');
-                if(words.length < 2) {
-                    msg.reply(usage);
-                } else {
-                    var channel = client.channels.cache.find(ch => ch.id == words[1]);
-                    var word = words.slice(2).join(' ').toLowerCase().replace(/[^a-z\s:]/g, '');
-                    if(channel != null) {
-                        channel.send(stages[0]).then(m => {
-                            nextLetter(m, 0, word);
-                        });
-                    } else {
-                        msg.reply("No channel with the id `" + words[1] + "` exist! \n" + usage);
-                    }
-                }
-            }
-        });
     }
 }
-        

@@ -1,12 +1,29 @@
 const Discord = require('discord.js');
+const {Client , MessageEmbed} = require('discord.js');
+const client = new Client();
+snipes = new Discord.Collection()
 
-const client = new Discord.Client();
 
 const prefix = "$";
 
-client.once('ready', () => {
+client.on('ready', () => {
     console.log("I'm Online init")
 });
+
+client.on('messageDelete',message=>{
+    if(message.author.id !='712993507542958080' && message.author.id !='358623095428349955' && !(message.content.startsWith('$hm'))){
+        snipes.set(message.channel.id,message)
+        const LogChannel = client.channels.cache.get('863477491603079197')
+        const DeletedEmbed = new Discord.MessageEmbed()
+            .setTitle('Deleted Message')
+            .addField('Deleted by',`${message.author}-${message.author.id}`)
+            .addField('In', `${message.channel}`)
+            .addField('Content', `${message.content}`)
+            .setThumbnail(message.author.avatarURL({dynamic: true}))
+            .setTimestamp()
+        LogChannel.send(DeletedEmbed)
+    }
+})
 
 const fs = require('fs');
 
@@ -23,7 +40,7 @@ var nice =['69','420','4.20','369','69420','42069']
 const isNice = (element) => message.content==element;
 
 client.on('message', message=> {
-    if(!message.content.startsWith(prefix) || message.author.bot || !message.content == '69') {
+    if(!message.content.startsWith(prefix) || message.author.bot ) {
         return;
     } 
 
@@ -58,6 +75,16 @@ client.on('message', message=> {
     } else if (command == 'bruhmoment' || command == 'bm') {
         client.commands.get('bruhmoment' || 'bm').execute(message, args);
     }
+
+    
+    
+        if (message.content === 'flick') {
+            message.react('👌')
+                .then(() => message.react('😂'))
+                .then(() => message.react('🔥'))
+                .then(() => message.react('💯'))
+                .catch(error => console.error('One of the emojis failed to react:', error));
+        }
 
 });
 
