@@ -91,7 +91,7 @@ module.exports = {
         \`\`\`
         `];
 
-        if(words.length < 2 ) {
+        if(words.length < 2 || message.content.startsWith('$hangman')) {
             message.reply(usage);
         } else {
             
@@ -127,7 +127,7 @@ module.exports = {
         message.client.on('messageReactionAdd', (reaction, user) => {
             var msg = reaction.message;
             if(!user.bot) {
-                for(var i = 0; i < 7; i++) {
+                for(var i = 0; i < games.length; i++) {
                     var game = games[i];
                     if((msg.id == game.msg0.id || msg.id == game.msg1.id) && game.stage < stages.length) {
                         var letter = unicode[letters.indexOf(reaction.emoji.name)];
