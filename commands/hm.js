@@ -3,7 +3,7 @@ const client = new Discord.Client()
 
 
 module.exports = {
-    name: 'hm',
+    name: 'hangman' || 'hm',
     description: "Play hangman",
     execute(message,args) {
         var usage = "`$hm <your word(can be a phrase)>,[INCLUDE COMMA BETWEEN WORD & CLUE]<your clue(can also be a phrase)>`\n`Example: $hm apples and bananas,fruits`";
@@ -86,12 +86,12 @@ module.exports = {
         |    🤡        Word not guessed,lost
         |  🤏🎽👌       
         |    🩳    word requested by ${message.author.username}
-        |    👞        word/phrase: ${word}
+        |    👞        word/phrase was \"${word}\"
         =========       
         \`\`\`
         `];
 
-        if(words.length < 2 || message.content.startsWith('$hangman')) {
+        if(words.length < 2) {
             message.reply(usage);
         } else {
             
