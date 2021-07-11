@@ -159,8 +159,8 @@ module.exports = {
                                 game.msg1.edit(generateMessage(game.phrase, game.guesses));
 
                                 if(sik) {
-                                    const msg0 = game.msg0.edit(stages[game.stage].replace("-|", "-|   you guessed the phrase, nice"));
-                                    message.content.send(msg0)
+                                    game.msg0.edit(stages[game.stage].replace("-|", "-|   you guessed the phrase, nice"));
+                                    return message.channel.send('Game finished');
                                 }
                                 
                                 
