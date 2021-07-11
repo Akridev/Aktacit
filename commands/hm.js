@@ -35,61 +35,61 @@ module.exports = {
         }
 
         var stages = [`\`\`\`
-        /-----|     
-        |           clue: ${clue}
-        |           
-        |           word requested by ${message.author.username}
-        |           
-        =========
-        \`\`\`
-        `, `\`\`\`
-        /-----|
-        |    🤡     clue: ${clue}
-        |
-        |           word requested by ${message.author.username}
-        |
-        =========
-        \`\`\`
-        `, `\`\`\`
-        /-----|
-        |    🤡     clue: ${clue}
-        |    🎽
-        |           word requested by ${message.author.username}
-        |
-        \`\`\`
-        `, `\`\`\`
-        /-----|
-        |    🤡     clue: ${clue}
-        |  🤏🎽
-        |           word requested by ${message.author.username}
-        |
-        =========
-        \`\`\`
-        `, `\`\`\`
-        /-----|
-        |    🤡     clue: ${clue}
-        |  🤏🎽👌
-        |           word requested by ${message.author.username}
-        |
-        =========
-        \`\`\`
-        `, `\`\`\`
-        /-----|
-        |    🤡        clue: ${clue}
-        |  🤏🎽👌
-        |    🩳    word requested by ${message.author.username}
-        |
-        =========
-        \`\`\`
-        `, `\`\`\`
-        /-----|
-        |    🤡        Word not guessed,lost
-        |  🤏🎽👌       
-        |    🩳    word requested by ${message.author.username}
-        |    👞        word/phrase: ${word}
-        =========       
-        \`\`\`
-        `];
+/-----|     
+|           clue: ${clue}
+|           
+|           word requested by ${message.author.username}
+|           
+=========
+\`\`\`
+`, `\`\`\`
+/-----|
+|    🤡     clue: ${clue}
+|
+|           word requested by ${message.author.username}
+|
+=========
+\`\`\`
+`, `\`\`\`
+/-----|
+|    🤡     clue: ${clue}
+|    🎽
+|           word requested by ${message.author.username}
+|
+\`\`\`
+`, `\`\`\`
+/-----|
+|    🤡     clue: ${clue}
+|  🤏🎽
+|           word requested by ${message.author.username}
+|
+=========
+\`\`\`
+`, `\`\`\`
+/-----|
+|    🤡     clue: ${clue}
+|  🤏🎽👌
+|           word requested by ${message.author.username}
+|
+=========
+\`\`\`
+`, `\`\`\`
+/-----|
+|    🤡        clue: ${clue}
+|  🤏🎽👌
+|    🩳    word requested by ${message.author.username}
+|
+=========
+\`\`\`
+`, `\`\`\`
+/-----|
+|    🤡        Word not guessed,lost
+|  🤏🎽👌       
+|    🩳    word requested by ${message.author.username}
+|    👞        word/phrase: ${word}
+=========       
+\`\`\`
+`];
 
         if(words.length < 2 || message.content.startsWith('$hangman')) {
             message.reply(usage);
