@@ -52,14 +52,14 @@ module.exports = {
         \`\`\`
         `, `\`\`\`
         /-----|
-        |    🤡     clue: \'${clue}\'
+        |    🤡     clue: ${clue}
         |    🎽
         |           word requested by ${message.author.username}
         |
         \`\`\`
         `, `\`\`\`
         /-----|
-        |    🤡        clue: \'${clue}\'
+        |    🤡     clue: ${clue}
         |  🤏🎽
         |           word requested by ${message.author.username}
         |
@@ -67,7 +67,7 @@ module.exports = {
         \`\`\`
         `, `\`\`\`
         /-----|
-        |    🤡        clue: \'${clue}\'
+        |    🤡     clue: ${clue}
         |  🤏🎽👌
         |           word requested by ${message.author.username}
         |
@@ -75,7 +75,7 @@ module.exports = {
         \`\`\`
         `, `\`\`\`
         /-----|
-        |    🤡        clue: \'${clue}\'
+        |    🤡        clue: ${clue}
         |  🤏🎽👌
         |    🩳    word requested by ${message.author.username}
         |
@@ -86,12 +86,12 @@ module.exports = {
         |    🤡        Word not guessed,lost
         |  🤏🎽👌       
         |    🩳    word requested by ${message.author.username}
-        |    👞        word/phrase was \"${word}\"
+        |    👞        word/phrase: ${word}
         =========       
         \`\`\`
         `];
 
-        if(words.length < 2) {
+        if(words.length < 2 || message.content.startsWith('$hangman')) {
             message.reply(usage);
         } else {
             
@@ -159,7 +159,7 @@ module.exports = {
                                 game.msg1.edit(generateMessage(game.phrase, game.guesses));
 
                                 if(sik) {
-                                    return game.msg0.edit(stages[game.stage].replace("-|", "-|     you guessed the phrase, nice"));
+                                    return game.msg0.edit(stages[game.stage].replace("-|", "-| you guessed the phrase, nice"));
                                     
                                 }
                                 
