@@ -127,7 +127,7 @@ module.exports = {
         message.client.on('messageReactionAdd', (reaction, user) => {
             var msg = reaction.message;
             if(!user.bot) {
-                for(var i = 0; i < games.length; i++) {
+                for(var i = 0; i < 7; i++) {
                     var game = games[i];
                     if((msg.id == game.msg0.id || msg.id == game.msg1.id) && game.stage < stages.length) {
                         var letter = unicode[letters.indexOf(reaction.emoji.name)];
