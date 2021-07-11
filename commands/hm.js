@@ -6,9 +6,6 @@ module.exports = {
     name: 'hm',
     description: "Play hangman",
     execute(message,args) {
-        if(message.content.startsWith('$hangman')) {
-
-        }
         var usage = "`$hm <your word(can be a phrase)>,[INCLUDE COMMA BETWEEN WORD & CLUE]<your clue(can also be a phrase)>`\n`Example: $hm apples and bananas,fruits`";
         var letters = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯", "🇰", "🇱", "🇲", "🇳", "🇴", "🇵", "🇶", "🇷", "🇸", "🇹", "🇺", "🇻", "🇼", "🇽", "🇾", "🇿"];
         var unicode = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -94,7 +91,7 @@ module.exports = {
         \`\`\`
         `];
 
-        if(words.length < 2) {
+        if(words.length < 2 || message.content.startsWith('$hangman')) {
             message.reply(usage);
         } else {
             
