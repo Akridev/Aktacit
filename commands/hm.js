@@ -91,7 +91,7 @@ module.exports = {
         \`\`\`
         `];
 
-        if(words.length < 2 || message.content.startsWith('$hangman')) {
+        if(words.length < 2 ) {
             message.reply(usage);
         } else {
             
