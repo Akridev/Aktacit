@@ -66,8 +66,8 @@ client.on('message', message=> {
         client.commands.get('thancc').execute(message, args);
     } else if (command == 'insult') {
         client.commands.get('insult').execute(message, args);
-    } else if (command == 'hangman' || command == 'hm') {
-        client.commands.get('hangman' || 'hm').execute(message, args);
+    } else if (command == 'hm') {
+        client.commands.get('hm').execute(message, args);
     } else if (command == 'stopprocrastination' || command == 'stopp') {
         client.commands.get('stopprocrastination' || 'stopp').execute(message, args);
     } else if (command == 'weather' || command == 'w') {
