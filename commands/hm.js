@@ -3,9 +3,12 @@ const client = new Discord.Client()
 
 
 module.exports = {
-    name: 'hangman' || 'hm',
+    name: 'hm',
     description: "Play hangman",
     execute(message,args) {
+        if(message.content.startsWith('$hangman')) {
+
+        }
         var usage = "`$hm <your word(can be a phrase)>,[INCLUDE COMMA BETWEEN WORD & CLUE]<your clue(can also be a phrase)>`\n`Example: $hm apples and bananas,fruits`";
         var letters = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯", "🇰", "🇱", "🇲", "🇳", "🇴", "🇵", "🇶", "🇷", "🇸", "🇹", "🇺", "🇻", "🇼", "🇽", "🇾", "🇿"];
         var unicode = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -86,7 +89,7 @@ module.exports = {
         |    🤡        Word not guessed,lost
         |  🤏🎽👌       
         |    🩳    word requested by ${message.author.username}
-        |    👞        word/phrase was \"${word}\"
+        |    👞        word/phrase: ${word}
         =========       
         \`\`\`
         `];
@@ -127,7 +130,7 @@ module.exports = {
         message.client.on('messageReactionAdd', (reaction, user) => {
             var msg = reaction.message;
             if(!user.bot) {
-                for(var i = 0; i < games.length; i++) {
+                for(var i = 0; i < 7; i++) {
                     var game = games[i];
                     if((msg.id == game.msg0.id || msg.id == game.msg1.id) && game.stage < stages.length) {
                         var letter = unicode[letters.indexOf(reaction.emoji.name)];
