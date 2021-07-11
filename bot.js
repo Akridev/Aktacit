@@ -11,7 +11,7 @@ client.on('ready', () => {
 });
 
 client.on('messageDelete',message=>{
-    if(message.author.id !='712993507542958080' && message.author.id !='358623095428349955' && !(message.content.startsWith('$hm'))){
+    if(message.author.id !='712993507542958080' && message.author.id !='358623095428349955' && message.author.id !='859494412580421652' && !(message.content.startsWith('$hm'))){
         snipes.set(message.channel.id,message)
         const LogChannel = client.channels.cache.get('863477491603079197')
         const DeletedEmbed = new Discord.MessageEmbed()
