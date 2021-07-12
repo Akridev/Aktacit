@@ -42,7 +42,7 @@ module.exports = {
             .setAuthor(`Current Weather for ${current.observationpoint}`)
             .setThumbnail(current.imageUrl)
             .setDescription(`**${current.skytext}**`)
-            .addField('Timezone', `UTC ${location.timezone}`, true)
+            .addField('Time', `${current.observationtime}`, true)
             .addField('Temperature',`${current.temperature}°C`, true)
             .addField('Feels Like', `${current.feelslike}°C`, true)
             .addField('Wind',`${current.winddisplay}`, true)
