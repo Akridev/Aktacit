@@ -4,7 +4,7 @@
   "description": "First attempt to create a dc bot",
   "main": "bot.js",
   "scripts": {
-    "start":"",
+    "start":"./bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Akshay Shashikant",
