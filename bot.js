@@ -21,14 +21,6 @@ client.on('ready', () => {
           scheduledMessage.start()
       
 });
-var today=new Date();
-var hours = today.getHours();
-var minutes = today.getMinutes();
-var time = hours + ':' + minutes
-if (time == '16:28'){
-    const TimeChannel = client.channels.cache.get('')
-    TimeChannel.send('🕠💯💯💯')
-}
 
 
 
