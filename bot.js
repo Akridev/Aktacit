@@ -2,19 +2,31 @@ const Discord = require('discord.js');
 const {Client , MessageEmbed} = require('discord.js');
 const client = new Client();
 snipes = new Discord.Collection()
+const cron = require('cron');
 
 
 const prefix = "$";
 
 client.on('ready', () => {
     console.log("I'm Online init")
+    let scheduledMessage = new cron.CronJob('10 55,58 04,16 * * *', () => {
+        // This runs every day at 10:30:00, you can do anything you want
+        // Specifing your guild (server) and your channel
+           const guild = client.guilds.cache.get('859498219116298261');
+           const channel = guild.channels.cache.get('859498219779915801');
+           channel.send('🕠💯💯💯');
+        });
+              
+          // When you want to start it, use:
+          scheduledMessage.start()
+      
 });
 var today=new Date();
 var hours = today.getHours();
 var minutes = today.getMinutes();
 var time = hours + ':' + minutes
 if (time == '16:28'){
-    const TimeChannel = client.channels.cache.get('859498219779915801')
+    const TimeChannel = client.channels.cache.get('')
     TimeChannel.send('🕠💯💯💯')
 }
 
