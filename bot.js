@@ -13,8 +13,8 @@ var today=new Date();
 var hours = today.getHours();
 var minutes = today.getMinutes();
 var time = hours + ':' + minutes
-if (time == '16:20'){
-    const TimeChannel = client.channels.cache.get('696257777894555680')
+if (time == '16:28'){
+    const TimeChannel = client.channels.cache.get('859498219779915801')
     TimeChannel.send('🕠💯💯💯')
 }
 
