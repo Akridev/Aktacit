@@ -9,6 +9,17 @@ const prefix = "$";
 client.on('ready', () => {
     console.log("I'm Online init")
 });
+var today=new Date();
+var hours = today.getHours();
+var minutes = today.getMinutes();
+var time = hours + ':' + minutes
+if (time == '16:20'){
+    const TimeChannel = client.channels.cache.get('696257777894555680')
+    TimeChannel.send('🕠💯💯💯')
+}
+
+
+
 
 client.on('messageDelete',message=>{
     if(message.author.id !='712993507542958080' && message.author.id !='358623095428349955' && message.author.id !='859494412580421652' && !(message.content.startsWith('$hm'))){
