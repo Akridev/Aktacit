@@ -1,3 +1,13 @@
+const express = require('express')
+const app = express();
+const port = 3000
+
+app.get('/', (req, res) => res.send('Yo boi!!'))
+
+app.listen(port, () =>
+console.log(`Aktacit is listening a http://localhost:${port}`)
+);
+
 const Discord = require('discord.js');
 const {Client , MessageEmbed} = require('discord.js');
 const client = new Client();
@@ -29,6 +39,7 @@ client.on('messageDelete',message=>{
         LogChannel.send(DeletedEmbed)
     }
 })
+
 
 const fs = require('fs');
 

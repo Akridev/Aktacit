@@ -8,7 +8,7 @@ module.exports = {
         message.channel.send('Doing quik mafs...').then(Rm=>{
             const p = Rm.createdTimestamp - message.createdTimestamp
             Rm.delete(5000)
-            message.channel.send(`Bot Latency: ${p}ms , API Latency: ${client.ws.ping}`);
+            message.channel.send(`Bot Latency: ${p}ms`);
         });
         
     }
